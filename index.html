@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ateliers d'écriture en ligne – Doris Mandouélé</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Nunito:wght@400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --warm-cream: #FDF6E3;
+    --deep-brown: #3D1C02;
+    --rust: #C0480A;
+    --gold: #E8A020;
+    --forest: #2A5F3A;
+    --forest-light: #3D8B52;
+    --terracotta: #B55C2A;
+    --orange-bright: #F07020;
+    --leaf: #5D9B3A;
+    --sand: #F5DEB3;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Nunito', sans-serif; background-color: var(--warm-cream); color: var(--deep-brown); overflow-x: hidden; }
+
+  .kente-border { height: 18px; background: repeating-linear-gradient(90deg, var(--forest) 0px, var(--forest) 20px, var(--gold) 20px, var(--gold) 40px, var(--rust) 40px, var(--rust) 60px, var(--orange-bright) 60px, var(--orange-bright) 80px); }
+
+  nav { position: sticky; top: 0; z-index: 100; background: #F4E6C5; border-bottom: 2px solid var(--gold); display: flex; justify-content: space-between; align-items: center; padding: 8px 32px; flex-wrap: wrap; gap: 10px; }
+  .nav-brand { text-decoration: none; display: flex; align-items: center; }
+  .nav-brand img { height: 70px; width: auto; object-fit: contain; display: block; }
+  .nav-links { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
+  .nav-links a { text-decoration: none; color: var(--deep-brown); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--rust); }
+
+  /* HERO */
+  .hero { position: relative; background: linear-gradient(160deg, #FFF8E7 0%, #F9E8C5 60%, #F5D8A0 100%); padding: 60px 20px 80px; text-align: center; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 10% 20%, rgba(232,160,32,0.15) 0%, transparent 50%), radial-gradient(circle at 90% 80%, rgba(192,72,10,0.12) 0%, transparent 50%); pointer-events: none; }
+  .hero-feather { position: absolute; top: 20px; right: 30px; font-size: 60px; opacity: 0.18; transform: rotate(-25deg); animation: float 4s ease-in-out infinite; }
+  .hero-book { position: absolute; top: 30px; left: 30px; font-size: 55px; opacity: 0.15; animation: float 5s ease-in-out infinite reverse; }
+  @keyframes float { 0%, 100% { transform: translateY(0) rotate(-25deg); } 50% { transform: translateY(-12px) rotate(-25deg); } }
+  .hero-tag { display: inline-block; background: var(--forest); color: #fff; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 6px 20px; border-radius: 30px; margin-bottom: 18px; animation: fadeDown 0.6s ease both; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 7vw, 5rem); font-weight: 900; line-height: 1.1; color: var(--deep-brown); animation: fadeDown 0.7s ease 0.1s both; }
+  .hero h1 em { font-style: italic; color: var(--rust); }
+  .hero-subtitle-band { display: inline-block; background: var(--forest); color: #fff; font-weight: 800; font-size: clamp(1rem, 3vw, 1.5rem); letter-spacing: 0.08em; padding: 10px 32px; border-radius: 8px; margin: 20px 0 28px; animation: fadeDown 0.7s ease 0.2s both; }
+  .hero-author { animation: fadeDown 0.7s ease 0.3s both; }
+  .hero-author p { font-size: 1.15rem; color: var(--rust); font-weight: 700; }
+  .hero-author span { font-style: italic; color: var(--terracotta); font-size: 0.95rem; }
+  .hero-tagline { max-width: 620px; margin: 30px auto 0; background: rgba(255,255,255,0.65); border-left: 4px solid var(--gold); border-radius: 10px; padding: 16px 24px; font-size: 1.05rem; line-height: 1.7; font-weight: 600; color: var(--deep-brown); animation: fadeDown 0.7s ease 0.4s both; }
+  .hero-cta-group { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; animation: fadeDown 0.7s ease 0.5s both; }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+  .btn-primary { background: var(--rust); color: #fff; border: none; padding: 15px 38px; font-size: 1.05rem; font-weight: 800; border-radius: 50px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 6px 24px rgba(192,72,10,0.35); transition: transform 0.2s, box-shadow 0.2s; }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(192,72,10,0.45); }
+  .btn-secondary { background: var(--forest); color: #fff; border: none; padding: 15px 38px; font-size: 1.05rem; font-weight: 800; border-radius: 50px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 6px 24px rgba(42,95,58,0.3); transition: transform 0.2s, box-shadow 0.2s; }
+  .btn-secondary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(42,95,58,0.4); }
+
+  /* SECTIONS */
+  .section { padding: 70px 20px; }
+  .section-title { text-align: center; font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: var(--deep-brown); margin-bottom: 10px; }
+  .section-title span { color: var(--rust); }
+  .section-sub { text-align: center; color: var(--terracotta); font-weight: 600; margin-bottom: 48px; font-size: 1rem; }
+
+  /* BENEFITS */
+  .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; max-width: 960px; margin: 0 auto; }
+  .benefit-card { background: #fff; border-radius: 20px; padding: 32px 24px; text-align: center; box-shadow: 0 4px 20px rgba(61,28,2,0.08); border-top: 5px solid var(--gold); transition: transform 0.25s, box-shadow 0.25s; position: relative; overflow: hidden; }
+  .benefit-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--rust), var(--gold)); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+  .benefit-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(61,28,2,0.14); }
+  .benefit-card:hover::after { transform: scaleX(1); }
+  .benefit-icon { font-size: 2.6rem; margin-bottom: 16px; display: block; }
+  .benefit-card h3 { font-weight: 800; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--forest); margin-bottom: 8px; }
+  .benefit-card p { font-size: 0.9rem; color: #666; line-height: 1.6; }
+
+  /* LEVELS */
+  .levels-section { background: var(--forest); color: #fff; padding: 70px 20px; }
+  .levels-section .section-title { color: #fff; }
+  .levels-section .section-title span { color: var(--gold); }
+  .levels-section .section-sub { color: rgba(255,255,255,0.7); }
+  .levels-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 980px; margin: 0 auto; }
+  .level-card { background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.15); border-radius: 18px; padding: 28px 20px; transition: background 0.2s, border-color 0.2s; }
+  .level-card:hover { background: rgba(255,255,255,0.15); border-color: var(--gold); }
+  .level-card .level-grade { font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: var(--gold); font-weight: 700; display: block; margin-bottom: 10px; }
+  .level-card ul { list-style: none; padding: 0; }
+  .level-card ul li { font-size: 0.85rem; color: rgba(255,255,255,0.8); line-height: 1.7; padding-left: 14px; position: relative; }
+  .level-card ul li::before { content: '✦'; position: absolute; left: 0; color: var(--gold); font-size: 0.6rem; top: 4px; }
+
+  /* FORMAT */
+  .format-section { background: var(--sand); padding: 70px 20px; }
+  .format-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto; }
+  .format-item { background: #fff; border-radius: 16px; padding: 28px 22px; text-align: center; box-shadow: 0 3px 16px rgba(61,28,2,0.07); }
+  .format-item .fi-icon { font-size: 2.2rem; margin-bottom: 12px; display: block; }
+  .format-item h4 { font-weight: 800; color: var(--forest); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .format-item p { font-size: 0.88rem; color: #666; line-height: 1.6; }
+
+  /* ABOUT */
+  .about-section { padding: 70px 20px; background: #fff; }
+  .about-inner { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr; gap: 56px; align-items: start; }
+  @media (max-width: 640px) { .about-inner { grid-template-columns: 1fr; text-align: center; } }
+  .about-avatar { width: 160px; height: 160px; border-radius: 50%; background: linear-gradient(135deg, var(--forest) 0%, var(--leaf) 100%); display: flex; align-items: center; justify-content: center; font-size: 4.5rem; box-shadow: 0 8px 32px rgba(42,95,58,0.3); margin: 0 auto; flex-shrink: 0; overflow: hidden; }
+  .about-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .about-text h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--deep-brown); margin-bottom: 4px; }
+  .about-text .about-role { color: var(--rust); font-weight: 700; font-style: italic; margin-bottom: 16px; font-size: 0.95rem; }
+  .about-text p { color: #555; line-height: 1.8; font-size: 0.95rem; margin-bottom: 14px; }
+  .about-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+
+  .about-video { max-width: 860px; margin: 48px auto 0; text-align: center; }
+  .about-video-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--deep-brown); margin-bottom: 20px; }
+  .about-video video { width: 100%; max-width: 720px; border-radius: 20px; box-shadow: 0 12px 36px rgba(61,28,2,0.18); border: 4px solid #fff; outline: 2px solid var(--gold); }
+  .badge { display: inline-flex; align-items: center; gap: 6px; background: var(--warm-cream); border: 1.5px solid var(--gold); border-radius: 20px; padding: 6px 14px; font-size: 0.8rem; font-weight: 700; color: var(--deep-brown); }
+
+  /* FACEBOOK */
+  .facebook-section { background: linear-gradient(135deg, #1877F2 0%, #0A5DC2 100%); color: #fff; padding: 60px 20px; text-align: center; }
+  .facebook-section .section-title { color: #fff; }
+  .facebook-section .section-title span { color: #FFD700; }
+  .facebook-inner { max-width: 640px; margin: 0 auto; }
+  .facebook-inner p { opacity: 0.9; line-height: 1.7; margin-bottom: 24px; font-size: 0.97rem; }
+  .fb-btn { display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #1877F2; font-weight: 800; font-size: 1rem; padding: 14px 30px; border-radius: 50px; text-decoration: none; transition: transform 0.2s; }
+  .fb-btn:hover { transform: scale(1.04); }
+
+  /* PRICING */
+  .pricing-section { padding: 70px 20px; text-align: center; background: var(--warm-cream); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; max-width: 860px; margin: 0 auto; }
+  .price-card { border-radius: 24px; padding: 40px 30px; color: #fff; position: relative; overflow: hidden; text-align: center; }
+  .price-card.main { background: linear-gradient(135deg, var(--rust) 0%, var(--orange-bright) 100%); box-shadow: 0 16px 48px rgba(192,72,10,0.35); }
+  .price-card.pro { background: linear-gradient(135deg, var(--forest) 0%, var(--forest-light) 100%); box-shadow: 0 16px 48px rgba(42,95,58,0.3); }
+  .price-card.option { background: linear-gradient(135deg, var(--deep-brown) 0%, #6B3010 100%); box-shadow: 0 16px 48px rgba(61,28,2,0.3); }
+  .price-card::before { content: ''; position: absolute; top: -40px; right: -40px; width: 140px; height: 140px; background: rgba(255,255,255,0.07); border-radius: 50%; }
+  .price-card .price-badge { display: inline-block; background: rgba(255,255,255,0.2); color: #fff; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 16px; border-radius: 20px; margin-bottom: 16px; }
+  .price-amount { font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 900; line-height: 1; }
+  .price-period { font-size: 0.95rem; font-weight: 700; opacity: 0.8; margin-top: 4px; }
+  .price-desc { margin-top: 16px; font-size: 0.88rem; opacity: 0.85; line-height: 1.6; }
+
+  /* QUOTE */
+  .quote-section { background: var(--deep-brown); padding: 60px 20px; text-align: center; }
+  .quote-box { max-width: 680px; margin: 0 auto; position: relative; }
+  .quote-mark { font-family: 'Playfair Display', serif; font-size: 8rem; color: var(--gold); line-height: 0; position: absolute; top: 30px; left: -20px; opacity: 0.3; }
+  .quote-text { font-family: 'Playfair Display', serif; font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-style: italic; line-height: 1.7; color: #fff; padding: 0 30px; }
+  .quote-cta { display: inline-block; margin-top: 30px; background: var(--gold); color: var(--deep-brown); font-weight: 800; font-size: 1.1rem; padding: 12px 32px; border-radius: 50px; font-family: 'Dancing Script', cursive; font-size: 1.4rem; box-shadow: 0 4px 16px rgba(232,160,32,0.35); transition: transform 0.2s; text-decoration: none; }
+  .quote-cta:hover { transform: scale(1.04); }
+
+  /* CONTACT */
+  .contact-section { background: var(--forest); color: #fff; padding: 70px 20px; text-align: center; }
+  .contact-section .section-title { color: #fff; }
+  .contact-section .section-title span { color: var(--gold); }
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width: 720px; margin: 36px auto 0; }
+  .contact-card { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2); border-radius: 18px; padding: 28px 20px; text-align: center; transition: background 0.2s; }
+  .contact-card:hover { background: rgba(255,255,255,0.18); }
+  .contact-card .cc-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+  .contact-card h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; margin-bottom: 8px; }
+  .contact-card a { color: #fff; text-decoration: none; font-weight: 800; font-size: 1.05rem; }
+  .contact-card a:hover { color: var(--gold); }
+  .whatsapp-block { display: inline-flex; align-items: center; gap: 16px; background: #25D366; border-radius: 20px; padding: 22px 44px; margin-top: 32px; box-shadow: 0 8px 32px rgba(37,211,102,0.35); transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; color: #fff; }
+  .whatsapp-block:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(37,211,102,0.45); }
+  .whatsapp-icon { font-size: 2.5rem; }
+  .whatsapp-info strong { display: block; font-size: 1.6rem; font-weight: 800; letter-spacing: 0.05em; }
+  .whatsapp-info span { font-size: 0.85rem; opacity: 0.85; }
+  .contact-note { margin-top: 24px; font-size: 0.88rem; opacity: 0.6; font-style: italic; }
+
+  footer { background: #1A0C00; color: rgba(255,255,255,0.45); text-align: center; padding: 20px; font-size: 0.8rem; }
+
+  /* FORM */
+  .form-wrapper { max-width: 640px; margin: 48px auto 0; background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.2); border-radius: 24px; padding: 40px 36px; text-align: left; }
+  .form-wrapper h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #fff; margin-bottom: 6px; }
+  .form-wrapper p.form-intro { font-size: 0.88rem; color: rgba(255,255,255,0.65); margin-bottom: 28px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 540px) { .form-row { grid-template-columns: 1fr; } .form-wrapper { padding: 28px 20px; } }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .form-group label { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); }
+  .form-group input, .form-group select, .form-group textarea {
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.4); }
+  .form-group select option { background: var(--forest); color: #fff; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); background: rgba(255,255,255,0.15); }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-submit { width: 100%; background: var(--gold); color: var(--deep-brown); border: none; border-radius: 50px; padding: 15px 30px; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; cursor: pointer; margin-top: 8px; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(232,160,32,0.4); }
+  .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,160,32,0.5); }
+  .form-success { display: none; text-align: center; padding: 24px; background: rgba(37,211,102,0.15); border: 2px solid rgba(37,211,102,0.4); border-radius: 16px; color: #fff; font-size: 1rem; font-weight: 700; margin-top: 20px; }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="kente-border"></div>
+
+<nav>
+  <a class="nav-brand" href="#"><img src="logo-mots-pour-ecrire.png" alt="Des mots pour écrire - Doris Mandouélé"></a>
+  <ul class="nav-links">
+    <li><a href="#objectifs">Objectifs</a></li>
+    <li><a href="#niveaux">Niveaux</a></li>
+    <li><a href="#format">Format</a></li>
+    <li><a href="#tarifs">Tarifs</a></li>
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-feather">🪶</div>
+  <div class="hero-book">📖</div>
+  <h1>Des mots<br><em>pour écrire</em></h1>
+  <div class="hero-subtitle-band">DU CP À LA TERMINALE</div>
+  <div class="hero-author">
+    <p>Animés par <strong>Doris Mandouélé</strong></p>
+    <span>Écrivaine · Sociologue · Animatrice d'ateliers d'écriture</span>
+  </div>
+  <p class="hero-tagline">
+    Un projet d'école en ligne adapté à chaque niveau pour renforcer la maîtrise du français, la créativité et la confiance en soi — ouvert aux familles et aux établissements scolaires, en France, en Afrique et dans les territoires ultramarins.
+  </p>
+  <div class="hero-cta-group">
+    <a href="#contact" class="btn-primary">📲 S'inscrire maintenant</a>
+    <a href="#niveaux" class="btn-secondary">✨ Découvrir l'atelier</a>
+  </div>
+</section>
+
+<!-- OBJECTIFS -->
+<section class="section" id="objectifs">
+  <h2 class="section-title reveal">Objectifs <span>pédagogiques</span></h2>
+  <p class="section-sub reveal">Quatre piliers pour un épanouissement complet</p>
+  <div class="benefits-grid">
+    <div class="benefit-card reveal">
+      <span class="benefit-icon">✍️</span>
+      <h3>Expression écrite</h3>
+      <p>Renforcer les compétences rédactionnelles et la maîtrise de la langue française à chaque niveau scolaire.</p>
+    </div>
+    <div class="benefit-card reveal">
+      <span class="benefit-icon">💡</span>
+      <h3>Imaginaire & créativité</h3>
+      <p>Stimuler l'imagination à travers des exercices variés, ludiques et adaptés à l'âge de chaque élève.</p>
+    </div>
+    <div class="benefit-card reveal">
+      <span class="benefit-icon">🌍</span>
+      <h3>Identité & parcours</h3>
+      <p>Valoriser l'histoire personnelle de chaque élève et créer un espace d'expression sûr et bienveillant.</p>
+    </div>
+    <div class="benefit-card reveal">
+      <span class="benefit-icon">🤝</span>
+      <h3>Confiance en soi</h3>
+      <p>Encourager chaque enfant à se dépasser, à trouver sa voix et à être fier de ses productions écrites.</p>
+    </div>
+  </div>
+</section>
+
+<div class="kente-border"></div>
+
+<!-- NIVEAUX -->
+<section class="levels-section" id="niveaux">
+  <h2 class="section-title reveal">Tous les <span>niveaux</span> accueillis</h2>
+  <p class="section-sub reveal">Un programme adapté à chaque étape du parcours scolaire</p>
+  <div class="levels-grid">
+    <div class="level-card reveal">
+      <span class="level-grade">CP · CE2</span>
+      <ul>
+        <li>Écriture ludique</li>
+        <li>Phrases simples & jeux de mots</li>
+        <li>Création d'histoires courtes avec dessins</li>
+      </ul>
+    </div>
+    <div class="level-card reveal">
+      <span class="level-grade">CM1 · 6ème</span>
+      <ul>
+        <li>Raconter une aventure</li>
+        <li>Décrire un personnage</li>
+        <li>Inventer une lettre</li>
+      </ul>
+    </div>
+    <div class="level-card reveal">
+      <span class="level-grade">5ème · 3ème</span>
+      <ul>
+        <li>Écrire une nouvelle</li>
+        <li>Travailler les points de vue</li>
+        <li>Jeux de réécriture</li>
+      </ul>
+    </div>
+    <div class="level-card reveal">
+      <span class="level-grade">2nde · Terminale</span>
+      <ul>
+        <li>Poésie & autobiographie</li>
+        <li>Récit de vie</li>
+        <li>Écriture argumentée et créative</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FORMAT -->
+<section class="format-section" id="format">
+  <h2 class="section-title reveal">Déroulement des <span>ateliers</span></h2>
+  <p class="section-sub reveal">Un cadre structuré, bienveillant et efficace</p>
+  <div class="format-grid">
+    <div class="format-item reveal">
+      <span class="fi-icon">💻</span>
+      <h4>Format</h4>
+      <p>En visioconférence (Zoom, Meet, etc.) depuis chez vous, partout dans le monde.</p>
+    </div>
+    <div class="format-item reveal">
+      <span class="fi-icon">📅</span>
+      <h4>Fréquence</h4>
+      <p>Hebdomadaire — 1 heure par semaine, à l'heure convenue avec la famille.</p>
+    </div>
+    <div class="format-item reveal">
+      <span class="fi-icon">👥</span>
+      <h4>Groupes</h4>
+      <p>6 à 12 élèves maximum par session, regroupés par niveau homogène.</p>
+    </div>
+    <div class="format-item reveal">
+      <span class="fi-icon">📋</span>
+      <h4>Ressources</h4>
+      <p>Tous les supports pédagogiques sont fournis par Doris Mandouélé.</p>
+    </div>
+    <div class="format-item reveal">
+      <span class="fi-icon">📗</span>
+      <h4>Livret final</h4>
+      <p>Un livret numérique ou papier des productions de l'élève est remis en fin d'année.</p>
+    </div>
+    <div class="format-item reveal">
+      <span class="fi-icon">🏫</span>
+      <h4>Option présentiel</h4>
+      <p>Interventions ponctuelles possibles en établissement (Guyane, France, Afrique).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <h2 class="section-title reveal">Qui suis-<span>je ?</span></h2>
+  <p class="section-sub reveal">Une professionnelle de l'écriture au service de vos enfants</p>
+  <div class="about-inner reveal">
+    <div class="about-avatar"><img src="doris-photo.jpg" alt="Doris Mandouélé"></div>
+    <div class="about-text">
+      <h2>Doris Mandouélé</h2>
+      <p class="about-role">Écrivaine · Sociologue · Animatrice d'ateliers d'écriture</p>
+      <p>Sociologue de formation, auteure de plusieurs ouvrages de sociologie, de poésie et d'ethnologie, j'ai également enseigné dans le domaine du FLE et en milieu scolaire (SEGPA). Passionnée par la langue et l'expression écrite, je mets mon expérience au service des jeunes apprenants.</p>
+      <p>Mon approche est bienveillante, ludique et valorisante — chaque enfant progresse à son rythme et développe sa confiance en soi à travers l'écriture.</p>
+      <div class="about-badges">
+        <span class="badge">📚 6 livres publiés</span>
+        <span class="badge">🏫 Expérience en SEGPA</span>
+        <span class="badge">🌍 FLE & interculturel</span>
+        <span class="badge">🎓 Résidences d'écriture</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-video reveal">
+    <h3 class="about-video-title">🎬 Présentation en vidéo</h3>
+    <video controls preload="metadata">
+      <source src="video1.mov" type="video/mp4">
+      <source src="video1.mov" type="video/quicktime">
+      Votre navigateur ne supporte pas la lecture de vidéos.
+    </video>
+  </div>
+</section>
+
+
+<!-- TARIFS -->
+<section class="pricing-section" id="tarifs">
+  <h2 class="section-title reveal">Tarifs et <span>options</span></h2>
+  <p class="section-sub reveal">Des formules adaptées aux familles et aux établissements</p>
+  <div class="pricing-grid">
+    <div class="price-card main reveal">
+      <div class="price-badge">👨‍👩‍👧 Tarif famille</div>
+      <div class="price-amount">100€</div>
+      <div class="price-period">FORFAIT MENSUEL · soit l'équivalent de 25€/HEURE</div>
+      <p class="price-desc">Formule mensuelle (non disponible à l'heure). Tarif à convertir selon le pays. Idéal pour les familles souhaitant un suivi régulier tout au long de l'année scolaire.</p>
+    </div>
+    <div class="price-card pro reveal">
+      <div class="price-badge">🏫 Formule établissement</div>
+      <div class="price-amount">Sur devis</div>
+      <div class="price-period">PERSONNALISÉ</div>
+      <p class="price-desc">Devis établi selon les effectifs et la fréquence. Idéal pour les écoles, collèges et lycées en temps périscolaire.</p>
+    </div>
+    <div class="price-card option reveal">
+      <div class="price-badge">✈️ Option présentiel</div>
+      <div class="price-amount">Sur demande</div>
+      <div class="price-period">GUYANE · FRANCE · AFRIQUE</div>
+      <p class="price-desc">Interventions ponctuelles dans votre établissement. Contactez-nous pour discuter de la faisabilité et des conditions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="quote-box reveal">
+    <span class="quote-mark">"</span>
+    <p class="quote-text">Vous êtes écoliers, devenez écrivain de votre histoire !</p>
+    <br>
+    <a href="#contact" class="quote-cta">Inscrivez vos enfants dès maintenant 🖊️</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <h2 class="section-title reveal">Nous <span>contacter</span></h2>
+  <p style="opacity:0.75; margin-top:10px;" class="reveal">Disponible pour une présentation en visioconférence ou pour convenir d'une session test</p>
+
+  <div class="contact-grid reveal">
+    <div class="contact-card">
+      <span class="cc-icon">📧</span>
+      <h4>Email</h4>
+      <a href="mailto:dorisgaeelle@gmail.com">dorisgaeelle@gmail.com</a>
+    </div>
+    <div class="contact-card">
+      <span class="cc-icon">📞</span>
+      <h4>Téléphone</h4>
+      <a href="tel:+33752662569">07 52 66 25 69</a>
+    </div>
+  </div>
+
+
+
+  <div class="form-wrapper reveal">
+    <h3>&#x2709;&#xFE0F; Envoyer un message</h3>
+    <p class="form-intro">Remplissez ce formulaire et Doris vous repondra dans les plus brefs delais.</p>
+    <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="prenom">Prenom *</label>
+          <input type="text" id="prenom" name="prenom" placeholder="Votre prenom" required>
+        </div>
+        <div class="form-group">
+          <label for="nom">Nom *</label>
+          <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Adresse email *</label>
+        <input type="email" id="email" name="email" placeholder="votre@email.com" required>
+      </div>
+      <div class="form-group">
+        <label for="telephone">Telephone / WhatsApp</label>
+        <input type="tel" id="telephone" name="telephone" placeholder="+33 6 ...">
+      </div>
+      <div class="form-group">
+        <label for="niveau">Niveau scolaire de l enfant *</label>
+        <select id="niveau" name="niveau" required>
+          <option value="" disabled selected>Choisir un niveau...</option>
+          <option>CP</option><option>CE1</option><option>CE2</option>
+          <option>CM1</option><option>CM2</option><option>6eme</option>
+          <option>5eme</option><option>4eme</option><option>3eme</option>
+          <option>2nde</option><option>1ere</option><option>Terminale</option>
+          <option>Etablissement scolaire</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="pays">Pays / Territoire</label>
+        <input type="text" id="pays" name="pays" placeholder="Ex : France, Senegal, Guyane...">
+      </div>
+      <div class="form-group">
+        <label for="message">Votre message *</label>
+        <textarea id="message" name="message" placeholder="Parlez-nous de votre enfant, vos questions, vos disponibilites..." required></textarea>
+      </div>
+      <button type="submit" class="form-submit">Envoyer ma demande d inscription</button>
+    </form>
+    <div class="form-success" id="form-success">Merci ! Votre message a bien ete envoye. Doris vous contactera tres prochainement.</div>
+  </div>
+
+  <p class="contact-note reveal" style="margin-top:40px;">Inscriptions ouvertes pour l annee scolaire 2026-2027 - France - Afrique - Territoires ultramarins</p>
+</section>
+
+<div class="kente-border"></div>
+
+<footer>
+  <p>© 2026 Doris Mandouélé – Ateliers d'écriture créative en ligne · Du CP à la Terminale · Tous droits réservés.</p>
+</footer>
+
+<script>
+  // Formspree AJAX submission
+  const form = document.getElementById('contact-form');
+  const successMsg = document.getElementById('form-success');
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = form.querySelector('.form-submit');
+      btn.textContent = 'Envoi en cours...';
+      btn.disabled = true;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          form.style.display = 'none';
+          successMsg.style.display = 'block';
+        } else {
+          btn.textContent = 'Erreur, reessayez.';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.textContent = 'Erreur reseau.';
+        btn.disabled = false;
+      }
+    });
+  }
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
